@@ -1,0 +1,94 @@
+Questão 01
+
+---- home.jsp ----
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+    
+    <%int numero = Integer.parseInt(request.getParameter("numero"));%>
+    <ul>
+    <%
+            for (int i = 1; i <= 10; i++) {
+                int resultado = numero * i;
+        %>
+        <li><%= numero %> x <%= i %> = <%= resultado %></li>
+        <%
+            }
+        %>
+    </ul>
+    
+    <p><a href="pag.jsp">Voltar</a></p>
+</body>
+</html>
+
+---- pag.jsp ----
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="home.jsp" method="get">
+		<label for="numero">Informe um número inteiro:</label> <input
+			type="number" name="numero" id="numero" required> <input
+			type="submit" value="Calcular">
+	</form>
+</body>
+</html>
+
+Questão 02
+
+---- home.jsp ----
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+    <%
+        String palavra = request.getParameter("palavra");
+    
+        palavra = palavra.replaceAll("\\s", "").toLowerCase();
+        
+        boolean palindromo = new StringBuilder(palavra).reverse().toString().equals(palavra);
+    %>
+    
+    <p>A palavra "<%= request.getParameter("palavra") %>" <%= palindromo ? "é" : "não é" %> um palíndromo.</p>
+    
+    <p><a href="pag.jsp">Voltar</a></p>
+</body>
+</html>
+
+---- pag.jsp ----
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+    <form method="post" action="home.jsp">
+        <label for="palavra">Informe uma palavra:</label>
+        <input type="text" name="palavra" id="palavra" required>
+        <input type="submit" value="Verificar">
+    </form>
+</body>
+</html>
+
